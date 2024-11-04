@@ -46,11 +46,13 @@ class Sudoku {
             for (int i =0;i<9;i++){
                 int line[9] = {0};
                 for (int j=0;j<9;j++){
-                    if (line[array[i][j]-1] == 0){
-                        line[array[i][j]-1]++;
-                    }
-                    else{
-                        return false;
+                    if (array[i][j]!=0){
+                        if (line[array[i][j]-1] == 0){
+                            line[array[i][j]-1]++;
+                        }
+                        else{
+                            return false;
+                        }
                     }
                 }
             }
@@ -61,11 +63,13 @@ class Sudoku {
             for (int i =0;i<9;i++){
                 int col[9] = {0};
                 for (int j=0;j<9;j++){
-                    if (col[array[j][i]-1] == 0){
-                        col[array[j][i]-1]++;
-                    }
-                    else{
-                        return false;
+                    if (array[j][i] !=0){
+                        if (col[array[j][i]-1] == 0){
+                            col[array[j][i]-1]++;
+                        }
+                        else{
+                            return false;
+                        }
                     }
                 }
             }
@@ -79,11 +83,13 @@ class Sudoku {
                     for (int i=0;i<3;i++){
                         for (int j=0;j<3;j++){
                             int num = array[gridRow*3 + i][gridCol*3+j];
-                            if (grid[num-1] == 0){
-                                grid[num-1]++;
+                            if (num !=0){
+                                if (grid[num-1] == 0){
+                                    grid[num-1]++;
+                                }
+                                else{
+                                    return false;
                             }
-                            else{
-                                return false;
                             }
                         }
                     }
@@ -109,6 +115,25 @@ class Sudoku {
         
         bool getCorrect(){
             return correct;
+        }
+        bool solve(){
+            for (int i=0;i<9;i++){
+                for (int j=0;j<9;j++){
+                    if(array[i][j]==0){
+                        for (int num=1;num<=9;num++){
+                            array[i][j] = num;
+                            if (isCorrect()){
+                                if (solve()){
+                                    return true;
+                                }
+                            }
+                            array[i][j] = 0;
+                        }
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     private:
         int array[9][9];
