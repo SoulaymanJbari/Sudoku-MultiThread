@@ -1,4 +1,5 @@
 #include <iostream>
+#include <omp.h>
 
 class Sudoku {
     public:
@@ -130,6 +131,45 @@ class Sudoku {
                             array[i][j] = 0;
                         }
                         return false;
+                    }
+                }
+            }
+            return true;
+        }
+        bool solveMP(int depth){
+            bool found = false;
+            for (int i=0;i<9;i++){
+                for (int j=0;j<9;j++){
+                    if(array[i][j]==0){
+                        if (depth > 0){
+                            for (int num=1;num<=9;num++){
+                                array[i][j] = num;
+                                if (isCorrect()){
+                                    if (solveMP(depth+1)){
+                                        return true;
+                                    }
+                                }
+                                array[i][j] = 0;
+                            }
+                            return false;
+                        }
+                        else{
+                            #pragma omp parallel for firstprivate(array) shared(found)
+                            for (int num=1;num<=9;num++){
+                                if (found) continue;
+                                array[i][j] = num;
+                                if (isCorrect()){
+                                    if (solveMP(depth+1)){
+                                        #pragma omp critical
+                                        {
+                                            found = true;
+                                        }
+                                    }
+                                }
+                                array[i][j] = 0;
+                            }
+                            return found;
+                        }
                     }
                 }
             }
