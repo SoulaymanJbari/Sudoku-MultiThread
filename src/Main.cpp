@@ -1,5 +1,6 @@
 #include <iostream>
-#include "Sudoku.cpp"
+#include "../inc/Sudoku.h"
+#include "../inc/Solve.h"
 #include <omp.h>
 
 
@@ -16,14 +17,14 @@ int main(){
         {0, 7, 0, 2, 6, 0, 0, 0, 0}
     };
     Sudoku sudoku(array);
-    sudoku.afficherSudoku();
-    bool solved = sudoku.solve();
+    sudoku.printSudoku();
+    Solve::solve(sudoku);
     std::cout <<"\nLa solution normale est \n\n";
-    sudoku.afficherSudoku();
+    sudoku.printSudoku();
     Sudoku sudoku2(array);
-    bool solved2 = sudoku2.solveMP(0);
+    Solve::solveMP(sudoku2,0);
     std::cout <<"\nLa solution openMP est \n\n";
-    sudoku2.afficherSudoku();
+    sudoku2.printSudoku();
     return 0;
 
 
