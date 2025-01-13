@@ -19,10 +19,28 @@ int main(){
         {0, 0, 0, 0, 0, 4, 9, 0, 0}
     };
     Sudoku sudoku(array);
-    SudokuSet sudokuSet;
-    Solve::preSolve(sudokuSet,sudoku,10);
-    std::cout<<"La liste des sudokus possibles en depth 10 est :"<< sudokuSet.getSize() << "\n";
+    sudoku.printSudoku();
 
+    std::cout << "La réponse séquentielle est : \n";
+    auto start = std::chrono::high_resolution_clock::now();
+    Solve::solve(sudoku);
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+    std::cout << "Temps d'exécution : " << duration.count() << " ms" << std::endl;
+    sudoku.printSudoku();
+
+
+    Sudoku sudoku2(array);
+    std::cout << "La réponse OpenMP est : \n";
+
+    auto start2 = std::chrono::high_resolution_clock::now();
+    Solve::solveMP(sudoku2,5);
+    auto end2 = std::chrono::high_resolution_clock::now();
+    auto duration2 = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+    std::cout << "Temps d'exécution : " << duration.count() << " ms" << std::endl;
+    sudoku.printSudoku();
 
     return 0;
 

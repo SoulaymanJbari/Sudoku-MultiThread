@@ -48,3 +48,24 @@ void Solve::preSolve(SudokuSet &sudokuSet,Sudoku &sudoku, int depth){
         }
     }
 }
+bool Solve::solveMP(Sudoku &sudoku, int depth){
+    SudokuSet sudokuSet;
+    preSolve(sudokuSet,sudoku,depth);
+    int size = sudokuSet.getSize();
+    bool found = false;
+    #pragma omp parallel for
+    for (int i=0;i<size;i++){
+        if (found){
+            continue;
+        }
+        Sudoku personalSudoku = sudokuSet.at(i);
+        found = solve(personalSudoku);
+        if (found){
+            sudoku = personalSudoku;
+        }
+    }
+    if (found){
+        return true;
+    }
+    return false;
+}
