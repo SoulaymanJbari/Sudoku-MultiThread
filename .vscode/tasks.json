@@ -7,9 +7,11 @@
             "command": "/usr/bin/g++",
             "args": [
                 "-g",
+                "-fopenmp",
                 "./Main.cpp",
                 "./Solve.cpp",
                 "./Sudoku.cpp",
+                "./SudokuSet.cpp",
                 "-o",
                 "Main"
             ],

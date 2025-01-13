@@ -8,6 +8,7 @@ class Sudoku {
         bool finished;
         bool correct;
         Sudoku(int array[9][9]);
+        Sudoku();
         void printSudoku();
         bool isFinished();
         bool verify_line();

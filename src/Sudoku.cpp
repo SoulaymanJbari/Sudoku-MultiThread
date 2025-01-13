@@ -11,6 +11,11 @@ Sudoku::Sudoku(int array[9][9]){
     this->checked = 0;
     this->finished = false;
 }
+Sudoku::Sudoku(){
+    array[9][9] = {0};
+    this->checked = 0;
+    this->finished = false;
+}
 void Sudoku::printSudoku() {
     for (int i = 0; i < 9; ++i) {
         if (i % 3 == 0 && i != 0) {
@@ -25,6 +30,7 @@ void Sudoku::printSudoku() {
         }
         std::cout << '\n';
     }
+    std::cout << '\n';
 }
 
 bool Sudoku::isFinished(){
