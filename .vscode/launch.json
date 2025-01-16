@@ -2,16 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C++ Launch",
+            "name": "Launch SUDOKU_MULTITHREAD",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/src/Main",  // Chemin vers l'exécutable à lancer
-            "args": [],  // Arguments à passer au programme
-            "stopAtEntry": false,  // Si true, le programme s'arrête au premier point d'entrée
-            "cwd": "${workspaceFolder}",  // Répertoire de travail (généralement le dossier du projet)
-            "environment": [],  // Variables d'environnement à définir
-            "externalConsole": true,  // Si true, ouvre une console externe pour l'exécution
-            "MIMode": "gdb",  // Le débogueur utilisé, ici gdb
+            "program": "${workspaceFolder}/bin/SUDOKU_MULTITHREAD",  // Chemin vers votre exécutable
+            "args": [],  // Ajouter des arguments de ligne de commande si nécessaire
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,  // Si tu veux que l'exécutable s'affiche dans une nouvelle console
+            "MIMode": "gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -19,12 +19,14 @@
                     "ignoreFailures": true
                 }
             ],
-            "miDebuggerPath": "/usr/bin/gdb",  // Chemin vers le débogueur
-            "preLaunchTask": "C/C++: g++ build active file",  // Tâche à exécuter avant de lancer le débogage
-            "postDebugTask": "",  // Tâche à exécuter après le débogage
-            "serverStarted": "",  // Peut être utilisé pour attendre un processus externe avant de commencer à déboguer
-            "filterStderr": true,  // Si true, filtre les erreurs du programme
-            "filterStdout": false  // Si true, filtre la sortie standard du programme
+            "miDebuggerPath": "/usr/bin/gdb",  // Chemin vers GDB si nécessaire
+            "preLaunchTask": "make",  // Cette ligne permet de lancer la task make avant de démarrer le débogage
+            "logging": {
+                "moduleLoad": false,
+                "trace": true,
+                "engineLogging": true,
+                "programOutput": true
+            }
         }
     ]
 }
