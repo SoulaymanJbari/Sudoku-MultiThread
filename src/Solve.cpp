@@ -1,5 +1,7 @@
 #include <iostream>
 #include "../inc/Solve.h"
+#include <QApplication>
+
 bool Solve::solve(Sudoku &sudoku){
     for (int i=0;i<9;i++){
         for (int j=0;j<9;j++){
