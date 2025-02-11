@@ -407,7 +407,10 @@ build/SudokuSet.o: src/SudokuSet.cpp inc/SudokuSet.h \
 		inc/Sudoku.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/SudokuSet.o src/SudokuSet.cpp
 
-build/MyWindow.o: src/MyWindow.cpp inc/MyWindow.h
+build/MyWindow.o: src/MyWindow.cpp inc/MyWindow.h \
+		inc/Sudoku.h \
+		inc/Solve.h \
+		inc/SudokuSet.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/MyWindow.o src/MyWindow.cpp
 
 build/moc_MyWindow.o: build/moc_MyWindow.cpp 
